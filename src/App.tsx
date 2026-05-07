@@ -80,6 +80,7 @@ function App() {
 
       <Footer />
       <FloatingCall />
+      <BackToTop />
     </div>
 
   );
