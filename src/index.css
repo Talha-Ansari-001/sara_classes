@@ -4,13 +4,17 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 30 8% 10%; /* #1C1917 */
+    --foreground: 40 10% 98%;
+    --primary: 35 77% 33%; /* #A16207 - Heritage Gold */
+    --primary-foreground: 40 10% 98%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 30 8% 10%;
+    --foreground: 40 10% 98%;
+    --primary: 35 77% 33%;
+    --primary-foreground: 40 10% 98%;
   }
 }
 
@@ -19,16 +23,31 @@
     scroll-behavior: auto !important;
   }
   body {
-    @apply bg-background text-foreground font-serif selection:bg-primary selection:text-background;
-    background-color: #050505;
-    color: #FAFAFA;
+    @apply bg-background text-foreground selection:bg-primary selection:text-background;
+    background-color: #1C1917;
+    color: #FAFAF9;
+    font-family: 'Playfair Display', serif;
   }
 }
 
 .font-mono {
   font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .font-serif {
   font-family: 'Playfair Display', serif;
+}
+
+.text-gold {
+  color: #A16207;
+}
+
+.bg-gold {
+  background-color: #A16207;
+}
+
+.border-gold {
+  border-color: #A16207;
 }

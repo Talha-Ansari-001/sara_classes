@@ -14,6 +14,15 @@ const navLinks = [
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const observerOptions = {
@@ -42,44 +51,56 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+    <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-6">
       <motion.div 
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="max-w-7xl mx-auto flex items-center justify-between bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl px-6 py-3"
+        className={cn(
+          "max-w-7xl mx-auto flex items-center justify-between backdrop-blur-md border rounded-2xl px-6 py-3 transition-all duration-500",
+          scrolled 
+            ? "bg-[#1C1917]/80 border-primary/20 shadow-[0_0_30px_rgba(161,98,7,0.1)]" 
+            : "bg-white/5 border-white/10"
+        )}
       >
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center font-serif font-bold text-background">S</div>
-          <span className="font-serif font-bold text-xl tracking-tight">Sara Classes</span>
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center font-serif font-black text-white shadow-lg shadow-primary/20">S</div>
+          <div className="flex flex-col">
+            <span className="font-serif font-bold text-xl tracking-tight leading-none">Sara Classes</span>
+            <span className="font-mono text-[8px] text-primary tracking-[0.2em]">Premium Education</span>
+          </div>
         </div>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8 font-mono text-xs uppercase tracking-widest text-foreground/70">
+        <div className="hidden md:flex items-center gap-10 font-mono text-[10px] tracking-[0.15em]">
           {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className={cn(
-                "hover:text-primary transition-colors relative py-1",
-                activeSection === link.href.slice(1) && "text-primary"
-              )}
-            >
-              {link.name}
-              {activeSection === link.href.slice(1) && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                />
-              )}
-            </a>
+            <Magnetic key={link.name}>
+              <a
+                href={link.href}
+                className={cn(
+                  "hover:text-primary transition-colors relative py-1",
+                  activeSection === link.href.slice(1) ? "text-primary" : "text-foreground/60"
+                )}
+              >
+                {link.name}
+                {activeSection === link.href.slice(1) && (
+                  <motion.div
+                    layoutId="activeNav"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </a>
+            </Magnetic>
           ))}
         </div>
 
         <div className="flex items-center gap-4">
           <Magnetic>
-            <a href="tel:8600272278" className="hidden md:flex items-center gap-2 bg-primary text-background px-4 py-2 rounded-xl font-bold text-sm hover:brightness-110 transition-all">
-              <Phone className="w-4 h-4" />
+            <a 
+              href="tel:8600272278" 
+              className="hidden md:flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-mono text-[10px] font-bold hover:shadow-lg hover:shadow-primary/30 transition-all border border-primary/50"
+            >
+              <Phone className="w-3.5 h-3.5" />
               86002 72278
             </a>
           </Magnetic>

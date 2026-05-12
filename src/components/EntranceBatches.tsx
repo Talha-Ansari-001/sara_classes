@@ -89,21 +89,32 @@ const EvervaultCard = ({ batch, index }: { batch: typeof batches[0], index: numb
 
 export const EntranceBatches = () => {
   return (
-    <section id="entrance" className="py-24 px-4 bg-background relative overflow-hidden">
+    <section id="entrance" className="py-32 px-4 bg-background relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-4">
+        <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
           <div className="max-w-2xl">
-            <h2 className="text-4xl font-serif font-bold mb-4">Entrance Coaching</h2>
-            <p className="text-foreground/60 font-serif">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="inline-block mb-4 px-4 py-1 border border-primary/20 rounded-full bg-primary/5 text-primary font-mono text-[10px] tracking-[0.2em] uppercase"
+            >
+              Elite Coaching
+            </motion.div>
+            <h2 className="text-5xl font-serif font-black mb-6 tracking-tighter">Entrance Excellence</h2>
+            <p className="text-foreground/40 font-serif italic text-lg leading-relaxed">
               Our flagship programs designed for high-stakes examinations. Intensive training with a focus on problem-solving speed and conceptual depth.
             </p>
           </div>
-          <div className="bg-primary/10 border border-primary/20 px-6 py-2 rounded-full text-primary font-mono text-sm">
-            Admissions Open 2026-27
-          </div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="bg-primary/10 border border-primary/20 px-8 py-3 rounded-2xl text-primary font-mono text-[10px] font-bold tracking-[0.1em] shadow-lg shadow-primary/5"
+          >
+            ADMISSIONS OPEN 2026-27
+          </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-10">
           {batches.map((batch, i) => (
             <EvervaultCard key={i} batch={batch} index={i} />
           ))}
@@ -112,8 +123,16 @@ export const EntranceBatches = () => {
       
       {/* Background Ambient Glows */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full" />
+        <motion.div 
+          animate={{ opacity: [0.05, 0.1, 0.05] }}
+          transition={{ duration: 10, repeat: Infinity }}
+          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full" 
+        />
+        <motion.div 
+          animate={{ opacity: [0.05, 0.1, 0.05] }}
+          transition={{ duration: 12, repeat: Infinity, delay: 2 }}
+          className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full" 
+        />
       </div>
     </section>
   );

@@ -3,6 +3,8 @@ import { Hero } from "./components/Hero";
 import { SuccessMarquee } from "./components/SuccessMarquee";
 import { BentoAcademic } from "./components/BentoAcademic";
 import { Philosophy } from "./components/Philosophy";
+import { FacultyGallery } from "./components/FacultyGallery";
+import { JourneyRoadmap } from "./components/JourneyRoadmap";
 import { EntranceBatches } from "./components/EntranceBatches";
 import { ContactSection } from "./components/ContactSection";
 import { Footer } from "./components/Footer";
@@ -46,10 +48,10 @@ function App() {
 
 
   return (
-    <div className="bg-background text-foreground min-h-screen selection:bg-primary selection:text-background">
-      {/* Scroll Progress Bar */}
+    <div className="bg-[#1C1917] text-foreground min-h-screen selection:bg-primary selection:text-white">
+      {/* Scroll Progress Bar (Gold Thread) */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-primary z-[60] origin-left"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary via-primary/50 to-transparent z-[60] origin-left"
         style={{ scaleX }}
       />
       
@@ -67,6 +69,10 @@ function App() {
           <BentoAcademic />
           
           <Philosophy />
+
+          <FacultyGallery />
+
+          <JourneyRoadmap />
           
           <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
           
@@ -87,4 +93,3 @@ function App() {
 }
 
 export default App;
-

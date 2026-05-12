@@ -10,12 +10,7 @@ import {
 import { wrap } from "framer-motion";
 import { useRef } from "react";
 
-interface ParallaxProps {
-  children: string;
-  baseVelocity: number;
-}
-
-function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
+function ParallaxText({ children, baseVelocity = 100 }: { children: React.ReactNode, baseVelocity: number }) {
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -27,19 +22,12 @@ function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
     clamp: false,
   });
 
-  /**
-   * This is a magic number to determine how much to wrap the text around.
-   * By setting it to -20% and -45% it helps to keep the text in view at all times.
-   */
   const x = useTransform(baseX, (v) => `${wrap(-20, -45, v)}%`);
 
   const directionFactor = useRef<number>(1);
   useAnimationFrame((_t, delta) => {
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
-    /**
-     * This is what changes the direction of the scroll based on scroll velocity
-     */
     if (velocityFactor.get() < 0) {
       directionFactor.current = -1;
     } else if (velocityFactor.get() > 0) {
@@ -51,17 +39,13 @@ function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
     baseX.set(baseX.get() + moveBy);
   });
 
-  /**
-   * The number of times to repeat the child text should be enough to fill the screen
-   * and allow for a seamless loop.
-   */
   return (
-    <div className="overflow-hidden tracking-[-2px] leading-[0.8] m-0 white-space-nowrap flex flex-nowrap">
-      <motion.div className="font-serif font-black uppercase text-6xl flex flex-nowrap gap-12 whitespace-nowrap" style={{ x }}>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
-        <span>{children} </span>
+    <div className="overflow-hidden tracking-tighter leading-[0.8] m-0 whitespace-nowrap flex flex-nowrap">
+      <motion.div className="font-serif font-black uppercase text-5xl md:text-7xl flex flex-nowrap gap-12 whitespace-nowrap" style={{ x }}>
+        {children}
+        {children}
+        {children}
+        {children}
       </motion.div>
     </div>
   );
@@ -75,13 +59,24 @@ export const SuccessMarquee = () => {
     "Admissions Open for 2026-27"
   ];
 
-  const content = items.join(" • ");
-
   return (
-    <section className="py-20 bg-primary/5 overflow-hidden border-y border-white/5">
-      <ParallaxText baseVelocity={-5}>{content}</ParallaxText>
-      <div className="h-4" />
-      <ParallaxText baseVelocity={5}>{content}</ParallaxText>
+    <section className="py-24 bg-primary/[0.02] overflow-hidden border-y border-primary/10 relative">
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background z-10 pointer-events-none" />
+      <ParallaxText baseVelocity={-3}>
+        {items.map((item, i) => (
+          <span key={i} className="flex items-center">
+            {item} <span className="mx-12 text-primary opacity-50">✦</span>
+          </span>
+        ))}
+      </ParallaxText>
+      <div className="h-10" />
+      <ParallaxText baseVelocity={3}>
+        {items.map((item, i) => (
+          <span key={i} className="flex items-center text-primary/40 italic">
+            {item} <span className="mx-12 text-primary/20">✦</span>
+          </span>
+        ))}
+      </ParallaxText>
     </section>
   );
 };
