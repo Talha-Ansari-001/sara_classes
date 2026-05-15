@@ -55,7 +55,7 @@ export const Hero = () => {
         
         <h1 className="text-6xl md:text-8xl font-serif font-black mb-8 leading-[0.9] tracking-tighter">
           Shape Your{" "}
-          <div className="inline-block relative h-[1.1em] min-w-[240px] text-primary align-bottom overflow-hidden">
+          <div className="inline-block relative h-[1.1em] min-w-[200px] md:min-w-[320px] text-primary align-bottom overflow-hidden text-left">
             <AnimatePresence mode="wait">
               <motion.span
                 key={words[index]}
@@ -63,7 +63,7 @@ export const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -40 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute left-0 right-0 text-center"
+                className="absolute left-0"
               >
                 {words[index]}
               </motion.span>
