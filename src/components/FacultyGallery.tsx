@@ -1,4 +1,4 @@
-import { motion, useScroll, useAnimation } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useRef, useEffect } from "react";
 import { Quote } from "lucide-react";
 
