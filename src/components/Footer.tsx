@@ -48,7 +48,7 @@ export const Footer = () => {
           <div className="flex items-center gap-3 mb-8">
             <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center font-serif font-black text-white text-2xl shadow-lg shadow-primary/20">S</div>
             <div className="flex flex-col">
-              <span className="font-serif font-bold text-2xl tracking-tight leading-none">Sara Classes</span>
+              <span className="font-serif font-bold text-2xl tracking-tight leading-none">Apex Academy</span>
               <span className="font-mono text-[9px] text-primary tracking-[0.2em] uppercase">Premium Education</span>
             </div>
           </div>
@@ -109,7 +109,7 @@ export const Footer = () => {
       
       <div className="max-w-7xl mx-auto mt-24 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
         <p className="text-[10px] font-mono text-foreground/20 uppercase tracking-[0.3em]">
-          &copy; 2026 Sara Classes Bhiwandi. Heritage Excellence.
+          &copy; 2026 Apex Academy Bhiwandi. Heritage Excellence.
         </p>
         <div className="flex gap-10 text-[10px] font-mono uppercase tracking-[0.2em] text-foreground/20">
           <a href="#" className="hover:text-primary transition-colors">Privacy</a>

@@ -50,7 +50,7 @@ export const Hero = () => {
           className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 border border-primary/20 rounded-full bg-primary/5 backdrop-blur-sm text-primary font-mono text-[10px] tracking-[0.2em] uppercase"
         >
           <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-          Sara Classes Bhiwandi
+          Apex Academy Bhiwandi
         </motion.div>
         
         <h1 className="text-6xl md:text-8xl font-serif font-black mb-8 leading-[0.9] tracking-tighter">
@@ -70,7 +70,7 @@ export const Hero = () => {
             </AnimatePresence>
           </div>
           <br />
-          with Sara Classes.
+          with Apex Academy.
         </h1>
         
         <motion.p

@@ -46,7 +46,7 @@ export const ContactSection = () => {
     if (!isValid) return;
 
     const phoneNumber = "918600272278";
-    const text = `Hi Miss Sara, my name is ${formData.name}. I am interested in ${formData.course}. Message: ${formData.message}`;
+    const text = `Hi Apex Academy, my name is ${formData.name}. I am interested in ${formData.course}. Message: ${formData.message}`;
     const encodedText = encodeURIComponent(text);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
 

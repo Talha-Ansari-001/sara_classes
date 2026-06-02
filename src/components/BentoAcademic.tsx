@@ -29,7 +29,7 @@ const items: BentoItem[] = [
     type: "success",
     name: "Aryan Sheikh",
     achievement: "98.4% in SSC 2025",
-    testimonial: "The personalized mentorship at Sara Classes completely changed my approach to learning.",
+    testimonial: "The personalized mentorship at Apex Academy completely changed my approach to learning.",
     image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=400&auto=format&fit=crop",
     className: "md:col-span-1",
   },

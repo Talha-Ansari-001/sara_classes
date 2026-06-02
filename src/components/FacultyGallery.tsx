@@ -1,5 +1,5 @@
-import { motion, useScroll } from "framer-motion";
-import { useRef } from "react";
+import { motion, useScroll, useAnimation } from "framer-motion";
+import { useRef, useEffect } from "react";
 import { Quote } from "lucide-react";
 
 const faculty = [
@@ -42,26 +42,20 @@ const FacultyCard = ({ member, index }: { member: typeof faculty[0], index: numb
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: index * 0.1 }}
-      className="relative min-w-[300px] md:min-w-[400px] group"
+      className="relative min-w-[300px] md:min-w-[400px] group snap-center"
     >
-      {/* Liquid Glass Container */}
       <div className="relative h-[500px] rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-700 group-hover:border-primary/40 group-hover:shadow-[0_0_40px_rgba(161,98,7,0.15)]">
-        
-        {/* Editorial Image: B&W to Color Transition */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <motion.img 
             src={member.image} 
             alt={member.name}
             className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
           />
-          {/* Overlay Gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#1C1917] via-[#1C1917]/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-700" />
         </div>
 
-        {/* Card Content */}
         <div className="absolute inset-0 z-10 p-10 flex flex-col justify-end">
           <div className="relative">
-            {/* Border Trace Effect (Subtle Gold Line) */}
             <motion.div 
               initial={{ width: 0 }}
               whileInView={{ width: "100%" }}
@@ -85,7 +79,6 @@ const FacultyCard = ({ member, index }: { member: typeof faculty[0], index: numb
           </div>
         </div>
 
-        {/* Liquid Glass Shine */}
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
       </div>
     </motion.div>
@@ -94,9 +87,24 @@ const FacultyCard = ({ member, index }: { member: typeof faculty[0], index: numb
 
 export const FacultyGallery = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollXProgress } = useScroll({
-    container: containerRef,
-  });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const totalWidth = containerRef.current?.scrollWidth || 0;
+    const viewportWidth = containerRef.current?.offsetWidth || 0;
+
+    controls.start({
+      x: [0, -(totalWidth - viewportWidth)],
+      transition: {
+        x: {
+          repeat: Infinity,
+          repeatType: "mirror",
+          duration: 30,
+          ease: "linear",
+        },
+      },
+    });
+  }, [controls]);
 
   return (
     <section className="py-32 bg-background relative overflow-hidden">
@@ -115,34 +123,24 @@ export const FacultyGallery = () => {
               Meet the visionaries and educators who shape the future of our students through personalized guidance and academic rigor.
             </p>
           </div>
-          
-          {/* Custom Scroll Indicator */}
-          <div className="hidden md:flex flex-col items-end gap-3">
-            <span className="font-mono text-[10px] text-primary/60 tracking-widest uppercase">Slide to explore</span>
-            <div className="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
-              <motion.div 
-                className="h-full bg-primary origin-left"
-                style={{ scaleX: scrollXProgress }}
-              />
-            </div>
-          </div>
         </div>
       </div>
 
-      {/* Horizontal Scroll Container */}
-      <div 
-        ref={containerRef}
-        className="flex gap-8 overflow-x-auto pb-20 px-[5vw] scrollbar-hide snap-x snap-mandatory"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-      >
-        {faculty.map((member, i) => (
-          <FacultyCard key={i} member={member} index={i} />
-        ))}
-        {/* Spacer for end of scroll */}
-        <div className="min-w-[5vw]" />
+      <div className="relative overflow-hidden w-full">
+        <motion.div 
+          ref={containerRef}
+          animate={controls}
+          className="flex gap-8 px-[5vw]"
+        >
+          {faculty.map((member, i) => (
+            <FacultyCard key={i} member={member} index={i} />
+          ))}
+          {faculty.map((member, i) => (
+            <FacultyCard key={i + faculty.length} member={member} index={i} />
+          ))}
+        </motion.div>
       </div>
 
-      {/* Atmospheric Background Glow */}
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
     </section>
   );

@@ -65,7 +65,7 @@ export const Navbar = () => {
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center font-serif font-black text-white shadow-lg shadow-primary/20">S</div>
           <div className="flex flex-col">
-            <span className="font-serif font-bold text-xl tracking-tight leading-none">Sara Classes</span>
+            <span className="font-serif font-bold text-xl tracking-tight leading-none">Apex Academy</span>
             <span className="font-mono text-[8px] text-primary tracking-[0.2em]">Premium Education</span>
           </div>
         </div>
